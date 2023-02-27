@@ -1,0 +1,22 @@
+<div class="container" [formGroup]="form">
+  <div class="row">
+    <div class="col-10"><a routerLink="/">Continue Shopping</a></div>
+    <div class="col-2">
+      <app-basket-link [count]="productCount$ | async"></app-basket-link>
+    </div>
+  </div>
+
+  <app-basket-product *ngFor="let productForm of productForms.controls; let i = index; trackBy: trackBySku"
+    [productForm]="getAsProductFormGroup(productForm)" (remove)="handleRemove($event, i)"
+    (changeQuantity)="handleChangeQuantity(productForm.value.sku, $event)">
+  </app-basket-product>
+
+  <div class="row py-1">
+    <div class="col-3 offset-6">
+      SubTotal
+    </div>
+    <div class="col-3">
+      {{subTotal$ | async | currency}}
+    </div>
+  </div>
+</div>

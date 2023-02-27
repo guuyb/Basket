@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="row">
+    <div class="col offset-10">
+      <app-basket-link [count]="productCount$ | async"></app-basket-link>
+    </div>
+  </div>
+  <div class="row py-1" *ngFor="let product of products; trackBy: trackBySku">
+    <div class="col-4">{{ product.name }}</div>
+    <div class="col-4">{{ product.price | currency }}</div>
+    <div class="col-4">
+      <button class="btn btn-primary" (click)="addToBasket(product)">
+        Add to basket
+      </button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col offset-10">
+      <a routerLink="/checkout">Proceed to checkout</a>
+    </div>
+  </div>
+</div>
